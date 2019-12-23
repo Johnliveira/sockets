@@ -5,6 +5,7 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.Scanner;
 
+import br.com.caelum.utils.CapConexao;
 import br.com.caelum.utils.Separador;
 
 public class Servidor {
@@ -13,8 +14,14 @@ public class Servidor {
 		
 		ServerSocket servidor = new ServerSocket(12345);
 		System.out.println("Porta 12345 aberta!");
-
-		Socket cliente = servidor.accept();
+		
+		while (true) {
+			Socket cliente = servidor.accept();
+			CapConexao conexao = new CapConexao(cliente);
+			Thread t = new Thread(conexao);
+			t.start();
+		}
+		
 		System.out.println("Nova conexão com o cliente " + cliente.getInetAddress().getHostAddress());
 
 		Separador separador = new Separador();
