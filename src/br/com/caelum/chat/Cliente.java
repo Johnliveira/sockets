@@ -25,7 +25,7 @@ public class Cliente implements Runnable {
 		
 		
 		try {
-			cliente = new Socket("127.0.0.1", 12345);
+			cliente = new Socket("LOCALHOST", 12345);
 			
 			System.out.println("O cliente conectou ao servidor!");
 			
