@@ -17,9 +17,12 @@ import java.net.Socket;
 import java.util.LinkedList;
 import java.util.Scanner;
 
+import br.com.caelum.chat.Cliente;
+
 public class Separador {
 
 	private LineNumberReader linhaLeitura;
+	protected Scanner scanner;
 
 	public String carrega() throws IOException {
 
@@ -36,7 +39,7 @@ public class Separador {
 		linhaLeitura.skip(arquivoLeitura.length());
 		int nLinhas = linhaLeitura.getLineNumber();
 
-		Scanner scanner = new Scanner(br);
+		scanner = new Scanner(br);
 
 		for (int i = 0; i <= nLinhas; i++) {
 			conversor.add(scanner.nextLine());
@@ -72,7 +75,7 @@ public class Separador {
 		linhaLeitura.skip(arquivoLeitura.length());
 		int nLinhas = linhaLeitura.getLineNumber();
 
-		Scanner scanner = new Scanner(br);
+		scanner = new Scanner(br);
 
 		for (int i = 0; i <= nLinhas; i++) {
 			conversor.add(scanner.nextLine());
@@ -112,5 +115,12 @@ public class Separador {
 		stream.close();
 		
 		return entrada;
+	}
+	
+	public String exibeMensagem(Cliente cliente) {
+		
+		scanner = new Scanner(cliente.get)
+		
+		return "";
 	}
 }
