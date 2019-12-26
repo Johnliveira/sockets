@@ -12,6 +12,7 @@ import java.util.Scanner;
 public class CapConexao implements Runnable {
 	
 	private static Socket cliente = null;
+	private Scanner entrada;
 	
 	public CapConexao(Socket cliente) {
 		CapConexao.cliente = cliente;
@@ -22,10 +23,18 @@ public class CapConexao implements Runnable {
 		// TODO Auto-generated method stub
 		try {
 			Separador separador = new Separador();
-			Scanner entrada = separador.salva(cliente);
+			setEntrada(separador.salva(cliente));
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+
+	public Scanner getEntrada() {
+		return entrada;
+	}
+
+	public void setEntrada(Scanner entrada) {
+		this.entrada = entrada;
 	}
 }

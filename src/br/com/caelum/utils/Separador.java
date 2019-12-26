@@ -17,8 +17,6 @@ import java.net.Socket;
 import java.util.LinkedList;
 import java.util.Scanner;
 
-import br.com.caelum.chat.Cliente;
-
 public class Separador {
 
 	private LineNumberReader linhaLeitura;
@@ -117,10 +115,4 @@ public class Separador {
 		return entrada;
 	}
 	
-	public String exibeMensagem(Cliente cliente) {
-		
-		scanner = new Scanner(cliente.get)
-		
-		return "";
-	}
 }
