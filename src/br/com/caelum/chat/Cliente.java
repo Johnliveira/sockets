@@ -32,13 +32,18 @@ public class Cliente {
 		Recebedor mensagens = new Recebedor(cliente.getInputStream());
 		new Thread(mensagens).start();
 		
+		Scanner userTeclado = new Scanner(System.in);
+		System.out.print("Digite seu Nick: ");
+		String user = userTeclado.next();
+		
 		Scanner teclado = new Scanner(System.in);
 		PrintStream saida = new PrintStream(cliente.getOutputStream());
 		while (teclado.hasNextLine()) {
-			saida.println(teclado.nextLine());
+			saida.println(user + ": " + teclado.nextLine());
 		}
 		
 		saida.close();
+		userTeclado.close();
 		teclado.close();
 		cliente.close();
 	}
