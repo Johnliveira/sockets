@@ -1,45 +1,46 @@
 package br.com.caelum.chat;
 
-import java.io.DataOutputStream;
 import java.io.IOException;
+import java.io.PrintStream;
 import java.net.Socket;
 import java.net.UnknownHostException;
+import java.util.Scanner;
 
-import br.com.caelum.utils.Separador;
+import br.com.caelum.utils.Recebedor;
 
-public class Cliente implements Runnable {
-
-	private Socket cliente;
+public class Cliente {
 	
-	public Cliente(Socket cliente) {
-		super();
-		this.cliente = cliente;
-	}
-
 	public static void main(String[] args) throws UnknownHostException, IOException {
+		
+		new Cliente("192.168.3.232", 12345).executa();
+		
 	}
 
-	@Override
-	public void run() {
-		// TODO Auto-generated method stub
+	private String host;
+	private int porta;
+	
+	public Cliente(String host, int porta) {
+		super();
+		this.host = host;
+		this.porta = porta;
+	}
+	
+	public void executa() throws UnknownHostException, IOException {
+		Socket cliente = new Socket(this.host, this.porta);
+		System.out.println("Conectado!");
 		
+		Recebedor mensagens = new Recebedor(cliente.getInputStream());
+		new Thread(mensagens).start();
 		
-		try {
-			cliente = new Socket("LOCALHOST", 12345);
-			
-			System.out.println("O cliente conectou ao servidor!");
-			
-			DataOutputStream saida = new DataOutputStream(cliente.getOutputStream());
-			Separador separador = new Separador();
-			
-			saida.writeBytes(separador.carrega());
-			
-			saida.close();
-			cliente.close();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		Scanner teclado = new Scanner(System.in);
+		PrintStream saida = new PrintStream(cliente.getOutputStream());
+		while (teclado.hasNextLine()) {
+			saida.println(teclado.nextLine());
 		}
 		
+		saida.close();
+		teclado.close();
+		cliente.close();
 	}
+
 }
