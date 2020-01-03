@@ -12,7 +12,7 @@ public class Cliente {
 	
 	public static void main(String[] args) throws UnknownHostException, IOException {
 		
-		new Cliente("192.168.3.232", 12345).executa();
+		new Cliente("127.0.1.1", 12345).executa();
 		
 	}
 
@@ -40,12 +40,13 @@ public class Cliente {
 		PrintStream saida = new PrintStream(cliente.getOutputStream());
 		while (teclado.hasNextLine()) {
 			saida.println(user + ": " + teclado.nextLine());
+			
+			if (teclado.nextLine().equals("exit")) {
+				saida.close();
+				userTeclado.close();
+				teclado.close();
+				cliente.close();
+			}
 		}
-		
-		saida.close();
-		userTeclado.close();
-		teclado.close();
-		cliente.close();
 	}
-
 }
